@@ -1,9 +1,9 @@
+// tests/resumeController.test.js
 const request = require('supertest');
-const app = require('../app'); // Assuming app.js is where you have set up express
+const app = require('../app');
 const mongoose = require('mongoose');
 const Resume = require('../models/Resume');
 
-// Mongoose models will be cleared before tests
 beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL);
 });
@@ -13,14 +13,20 @@ afterAll(async () => {
 });
 
 describe('Resume Controller', () => {
-    // Test for creating a resume
+    // Clear resumes before each test
+    beforeEach(async () => {
+        await Resume.deleteMany({});
+    });
+
     it('should create a new resume', async () => {
+        const uniqueResumeId = `resume-${Date.now()}`;
+
         const response = await request(app)
             .post('/api/resumes')
             .send({
                 data: {
                     title: 'My Resume',
-                    resumeId: 'resume-123',
+                    resumeId: uniqueResumeId,
                     userEmail: 'test@example.com',
                     userName: 'John Doe',
                 }
@@ -31,8 +37,15 @@ describe('Resume Controller', () => {
         expect(response.body.resume).toHaveProperty('title', 'My Resume');
     });
 
-    // Test for fetching resumes for a user
     it('should fetch all resumes for a specific user', async () => {
+        const resume = new Resume({
+            title: 'Test Resume',
+            resumeId: `resume-${Date.now()}`,
+            userEmail: 'test@example.com',
+            userName: 'Jane Doe',
+        });
+        await resume.save();
+
         const response = await request(app)
             .get('/api/resumes')
             .query({ userEmail: 'test@example.com' });
@@ -42,7 +55,6 @@ describe('Resume Controller', () => {
         expect(response.body.length).toBeGreaterThan(0);
     });
 
-    // Test for when no resumes are found
     it('should return a 404 if no resumes are found for a user', async () => {
         const response = await request(app)
             .get('/api/resumes')
