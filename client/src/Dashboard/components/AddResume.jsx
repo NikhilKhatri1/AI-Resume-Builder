@@ -21,7 +21,6 @@ const AddResume = () => {
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
     const onCreate = async () => {
         setLoading(true)
@@ -37,7 +36,7 @@ const AddResume = () => {
 
         try {
             // Send the POST request to the backend to create the resume
-            const response = await axios.post(`${BACKEND_URL}/api/resumes` || 'http://localhost:8000/api/resumes', data);
+            const response = await axios.post( 'http://localhost:8000/api/resumes', data);
             setLoading(false);
             console.log('Resume created successfully:', response.data);
             setOpenDialog(false); // Close the dialog after successful creation

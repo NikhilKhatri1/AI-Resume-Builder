@@ -10,14 +10,13 @@ const Dashboard = () => {
   const [resumeList, setResumeList] = useState([]);
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState('');  // Error message if any
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   // console.log(BACKEND_URL);
   // Function to fetch user resume list
   const userDataList = async () => {
     if (!user) return;
 
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/resumes` || 'http://localhost:8000/api/resumes', {
+      const response = await axios.get('http://localhost:8000/api/resumes', {
         params: { userEmail: user.primaryEmailAddress.emailAddress },
       });
       console.log(response.data);  // Log the response data

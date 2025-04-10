@@ -80,7 +80,7 @@ export default {
         {
             id: 1,
             name: 'React Native',
-            rating: 100,
+            rating: 60,
         }
     ]
 }
