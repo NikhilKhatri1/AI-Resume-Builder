@@ -1,0 +1,43 @@
+name: CI/CD Pipeline for MERN Stack
+
+on:
+  push:
+    branches:
+      - main # or 'production' based on your workflow
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install Backend Dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: 📦 Install Frontend Dependencies
+        working-directory: ./client
+        run: npm install
+
+      # Optional: Add backend/frontend tests
+      # - name: 🔍 Run Backend Tests
+      #   working-directory: ./backend
+      #   run: npm test
+
+      # - name: 🔍 Run Frontend Tests
+      #   working-directory: ./client
+      #   run: npm test
+
+      - name: 🛠️ Build Frontend
+        working-directory: ./client
+        run: npm run build
+
+      # Optional: Deploy step (to Render, Netlify, Vercel, or others)
+      # Example for deploying to Render, you’d skip this and let Render auto-deploy on push
