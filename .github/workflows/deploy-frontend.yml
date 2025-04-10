@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4   # Checks out the code in the repository
+        uses: actions/checkout@v2   # Checks out the code in the repository
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4  # Sets up Node.js environment
+        uses: actions/setup-node@v3  # Sets up Node.js environment
         with:
-          node-version: 20   # You can adjust this to your preferred Node.js version
+          node-version: '16'   # You can adjust this to your preferred Node.js version
 
       - name: Install dependencies
         run: |
@@ -26,7 +26,7 @@ jobs:
         run: |
           npm run build   # Builds the React app using Vite
 
-      - name: Deploy to GitHub Pages (Optional: Can be deployed to Netlify, Vercel, etc.)
+      - name: Deploy to GitHub Pages  #(Optional: Can be deployed to Netlify, Vercel, etc.)
         uses: peaceiris/actions-gh-pages@v3  # Action for deploying to GitHub Pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Automatically use the token for GitHub authentication
