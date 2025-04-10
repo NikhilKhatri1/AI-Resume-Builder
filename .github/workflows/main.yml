@@ -78,18 +78,5 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: 🚀 Notify Deployment Start
-        run: echo "Triggering deployment from external platform (Render, Netlify, etc.)"
-
-      # You can add curl or webhook call here if needed
-      # Example:
-      # - name: Call Webhook (optional)
-      #   run: curl -X POST https://your-deploy-hook-url
-
-      - name: ✅ Deployment Handled by External Services
-        run: echo "Frontend: Netlify | Backend: Render – Auto-deploys on push to main"
-
-      - name: 🌐 Output URLs
-        run: |
-          echo "Frontend: https://your-netlify-site.netlify.app"
-          echo "Backend: https://your-backend.onrender.com"
+    - name: 🚀 Deployed Successfully
+      run: echo "✅ Deployed Successfully"
