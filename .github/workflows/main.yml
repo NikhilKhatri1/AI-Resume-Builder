@@ -1,41 +1,95 @@
-name: MERN CI/CD Pipeline
+name: MERN Stack CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+      - 'features/**'
+    paths-ignore:
+      - '.github/workflows/*'
+      - README.md
+  workflow_dispatch:
 
 jobs:
-  test-and-build:
+  test:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
-      - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v3
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v4
 
-      - name: 🔧 Set up Node.js
-        uses: actions/setup-node@v3
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
 
-      # ✅ Step 1: Install backend dependencies
+      - name: 📦 Cache Backend Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/backend/package-lock.json') }}
+
       - name: 📦 Install Backend Dependencies
-        working-directory: ./backend
-        run: npm install
+        run: npm ci
 
-      # ✅ Step 2: Run backend tests
       - name: 🧪 Run Backend Tests
-        working-directory: ./backend
         env:
           MONGO_URL: ${{ secrets.MONGO_URL_TEST }}
-        run: npm test
+        run: npm run test
 
-      # ✅ Step 3: Install frontend dependencies
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Cache Frontend Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/client/package-lock.json') }}
+
       - name: 📦 Install Frontend Dependencies
-        working-directory: ./client
-        run: npm install
+        run: npm ci
 
-      # ✅ Step 4: Build frontend
-      - name: 🛠️ Build Frontend
-        working-directory: ./client
+      - name: 🛠️ Build React Project
         run: npm run build
+
+      - name: 📤 Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-build
+          path: ./client/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 🚀 Notify Deployment Start
+        run: echo "Triggering deployment from external platform (Render, Netlify, etc.)"
+
+      # You can add curl or webhook call here if needed
+      # Example:
+      # - name: Call Webhook (optional)
+      #   run: curl -X POST https://your-deploy-hook-url
+
+      - name: ✅ Deployment Handled by External Services
+        run: echo "Frontend: Netlify | Backend: Render – Auto-deploys on push to main"
+
+      - name: 🌐 Output URLs
+        run: |
+          echo "Frontend: https://your-netlify-site.netlify.app"
+          echo "Backend: https://your-backend.onrender.com"
