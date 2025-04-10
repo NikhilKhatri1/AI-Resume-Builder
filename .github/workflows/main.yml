@@ -36,7 +36,7 @@ jobs:
 
       - name: 🧪 Run Backend Tests
         env:
-          MONGO_URL: ${{secrets.GITHUB_TOKEN}}
+          MONGO_URL: ${{secrets.MONGO_URL}}
         run: npm run test
 
   build:

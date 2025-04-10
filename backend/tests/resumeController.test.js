@@ -3,6 +3,7 @@ const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
 const Resume = require('../models/Resume');
+require('dotenv').config();
 
 beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL);
