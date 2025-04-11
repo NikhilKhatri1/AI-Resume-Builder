@@ -1,44 +1,35 @@
-import React from 'react'
+import React from 'react';
+import dummyData from '@/Data/Dummy';
 
 const ExperiencePreview = ({ resumeInfo }) => {
+    const data = resumeInfo || dummyData;
+
     return (
         <div className='my-6'>
-            <h2
-                className='text-center font-bold text-sm mb-2'
-                style={{ color: resumeInfo?.themeColor }}
-            >Professional Experience</h2>
-            <hr
-                style={{ borderColor: resumeInfo?.themeColor }}
-            />
+            <h2 className='text-center font-bold text-sm mb-2' style={{ color: data.themeColor }}>
+                Professional Experience
+            </h2>
+            <hr style={{ borderColor: data.themeColor }} />
             {
-                resumeInfo?.experience.map((experience, index) => (
+                (data.experience || []).map((experience, index) => (
                     <div key={index} className='my-5'>
-                        <h2
-                            className='text-sm font-bold'
-                            style={{ color: resumeInfo?.themeColor }}
-                        >
-                            {experience?.title}
+                        <h2 className='text-sm font-bold' style={{ color: data.themeColor }}>
+                            {experience.title}
                         </h2>
-                        <h2
-                            className='text-xs flex justify-between'
-                        >
-                            {experience?.companyName},
-                            {experience?.city},
-                            {experience?.state}
+                        <h2 className='text-xs flex justify-between'>
+                            {experience.companyName}, {experience.city}, {experience.state}
                             <span>
-                                {experience?.startDate} {experience?.currentlyWorking ? "Present" : experience.endDate}
+                                {experience.startDate} {experience.currentlyWorking ? "Present" : experience.endDate}
                             </span>
                         </h2>
-                        <p
-                            className='text-xs my-2'
-                        >
-                            {experience?.workSummery}
+                        <p className='text-xs my-2'>
+                            {experience.workSummery}
                         </p>
                     </div>
                 ))
             }
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default ExperiencePreview
+export default ExperiencePreview;

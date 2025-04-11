@@ -1,32 +1,25 @@
-import { ResumeInfoContext } from '@/Context/ResumeInfoContext'
-import React, { useContext } from 'react'
+import { ResumeInfoContext } from '@/Context/ResumeInfoContext';
+import React, { useContext } from 'react';
 import PersonDetailPreview from './Preview/PersonDetailPreview';
 import SummaryPreview from './Preview/SummaryPreview';
 import ExperiencePreview from './Preview/ExperiencePreview';
 import EducationPreview from './Preview/EducationPreview';
 import SkillsPreview from './Preview/SkillsPreview';
+import dummyData from '@/Data/Dummy';
 
 const ResumePreview = () => {
-  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const { resumeInfo } = useContext(ResumeInfoContext);
+  const data = resumeInfo || dummyData;
+
   return (
-    <div className='shadow-lg h-full p-14 border-t-[20px]'
-      style={{
-        borderColor: resumeInfo?.themeColor
-      }}
-    >
-      {/* Person Detail  */}
-      <PersonDetailPreview resumeInfo={resumeInfo} />
-      {/* Summary  */}
-      <SummaryPreview resumeInfo={resumeInfo} />
-
-      {/* Professional Experience  */}
-      <ExperiencePreview resumeInfo={resumeInfo} />
-      {/* Educational Preview  */}
-      <EducationPreview resumeInfo={resumeInfo} />
-      {/* Skills  */}
-      <SkillsPreview resumeInfo={resumeInfo} />
+    <div className='shadow-lg h-full p-14 border-t-[20px]' style={{ borderColor: data.themeColor }}>
+      <PersonDetailPreview resumeInfo={data} />
+      <SummaryPreview resumeInfo={data} />
+      <ExperiencePreview resumeInfo={data} />
+      <EducationPreview resumeInfo={data} />
+      <SkillsPreview resumeInfo={data} />
     </div>
-  )
-}
+  );
+};
 
-export default ResumePreview
+export default ResumePreview;

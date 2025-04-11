@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDb = require("./database/db");
 const resumeRoutes = require("./routes/resumeRoutes");
+const personalDetailRoutes = require('./routes/personalDetailRoutes');
 require("dotenv").config();
 
 const app = express();
@@ -24,6 +25,10 @@ app.get("/", (req, res) => {
 
 // Resume routes
 app.use(resumeRoutes);
+
+// Personal Routes
+
+app.use(personalDetailRoutes);
 
 // Export the app for use in tests
 module.exports = app;
