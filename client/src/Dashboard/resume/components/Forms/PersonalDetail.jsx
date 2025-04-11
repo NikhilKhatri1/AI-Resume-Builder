@@ -2,8 +2,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ResumeInfoContext } from '@/Context/ResumeInfoContext';
 import axios from 'axios';
+import { Loader, LoaderCircle } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const PersonalDetail = ({ enableNext }) => {
     const { resumeId } = useParams();
@@ -44,6 +46,7 @@ const PersonalDetail = ({ enableNext }) => {
         try {
             await updateResumeDetail(resumeId, resumeInfo);
             enableNext(true);
+            toast("Details updated")
         } catch (err) {
             console.error("Error saving personal details:", err);
         } finally {
@@ -119,7 +122,7 @@ const PersonalDetail = ({ enableNext }) => {
                         type="submit"
                         disabled={loading}
                     >
-                        {loading ? 'Saving...' : 'Save'}
+                        {loading ? <LoaderCircle className='animate-spin' /> : 'Save'}
                     </Button>
                 </div>
             </form>

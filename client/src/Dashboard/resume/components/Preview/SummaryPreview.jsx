@@ -1,5 +1,5 @@
 import React from 'react';
-import dummyData from '@/Data/Dummy';
+import dummyData from "../../../../Data/Dummy.jsx";
 
 const SummaryPreview = ({ resumeInfo }) => {
     const data = resumeInfo || dummyData;
