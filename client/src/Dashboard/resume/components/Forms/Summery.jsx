@@ -64,7 +64,7 @@ const Summary = () => {
                     <div className='flex justify-between items-end'>
                         <label>Add Summary</label>
                         <Button type="button" variant="outline" size="sm" className="border-purple-600 hover:text-purple-600">
-                            Generate by AI
+                            Generate by AI by me
                         </Button>
                     </div>
                     <Textarea
