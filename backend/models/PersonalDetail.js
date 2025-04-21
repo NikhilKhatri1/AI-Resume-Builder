@@ -8,7 +8,9 @@ const personalDetailSchema = new mongoose.Schema({
     jobTitle: { type: String, required: true },
     address: { type: String, required: true },
     phone: { type: String, required: true },
-    email: { type: String, required: true }
+    email: { type: String, required: true },
+    summary: { type: String, required: true },
+    themeColor: { type: String, default: "#ff6666" },
 }, { timestamps: true });
 
 const PersonalDetail = mongoose.model('PersonalDetail', personalDetailSchema);
