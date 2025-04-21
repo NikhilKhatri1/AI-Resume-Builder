@@ -1,3 +1,5 @@
+// controllers/personalDetailController.js
+
 const PersonalDetail = require('../models/PersonalDetail');
 
 // Save or update personal detail or summary based on resumeId

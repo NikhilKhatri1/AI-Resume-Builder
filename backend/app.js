@@ -4,6 +4,7 @@ const cors = require("cors");
 const connectDb = require("./database/db");
 const resumeRoutes = require("./routes/resumeRoutes");
 const personalDetailRoutes = require('./routes/personalDetailRoutes');
+const userDataRoutes = require('./routes/userDataRoutes');
 require("dotenv").config();
 
 const app = express();
@@ -29,6 +30,10 @@ app.use(resumeRoutes);
 // Personal Routes
 
 app.use(personalDetailRoutes);
+
+// User Data Routes
+app.use('/api', userDataRoutes);
+
 
 // Export the app for use in tests
 module.exports = app;

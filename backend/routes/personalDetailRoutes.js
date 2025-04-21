@@ -1,3 +1,5 @@
+// routes/personalDetailRoutes.js
+
 const express = require('express');
 const { upsertPersonalDetail, getPersonalDetail } = require('../controllers/personalDetailController');
 const router = express.Router();

@@ -1,3 +1,4 @@
+// models/PersonalDetail.js
 const mongoose = require('mongoose');
 
 const personalDetailSchema = new mongoose.Schema({
