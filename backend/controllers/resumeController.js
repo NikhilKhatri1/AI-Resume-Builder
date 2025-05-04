@@ -34,9 +34,11 @@ const getResumes = async (req, res) => {
 
     try {
         const resumes = await Resume.find({ userEmail });
-        if (resumes.length === 0) {
-            return res.status(200).json([]);
+
+        if (!resumes || resumes.length === 0) {
+            return res.status(404).json({ message: 'No resumes found' });
         }
+
         res.status(200).json(resumes);
     } catch (error) {
         console.error('Error fetching resumes:', error);
