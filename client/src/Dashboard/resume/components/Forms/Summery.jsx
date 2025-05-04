@@ -1,3 +1,5 @@
+// client\src\Dashboard\resume\components\Forms\Summery.jsx
+
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeInfoContext } from '@/Context/ResumeInfoContext';
@@ -6,13 +8,19 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Dummy from "../../../../Data/Dummy.jsx"; // fallback data
 import { toast } from 'sonner';
-import { LoaderCircle } from 'lucide-react';
+import { Brain, LoaderCircle } from 'lucide-react';
+import { AIChatSession } from '../../../../../services/AIMODAL.js';
+
+
+const prompt = "Job Title: {jobTitle} , Depends on job title give me list of  summery for 3 experience level, Mid Level and Freasher level in 3 -4 lines in array format, With summery and experience_level Field in JSON Format"
 
 const Summary = ({ enableNext }) => {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const { resumeId } = useParams(); // assuming route is /resume/:id
     const [summary, setSummary] = useState(resumeInfo?.summary || Dummy.summary); // fallback to dummy summary
     const [loading, setLoading] = useState(false);
+    const [aiGeneratedSummaryList, setAiGeneratedSummaryList] = useState();
+
 
     // Fetch initial data on component mount
     useEffect(() => {
@@ -40,6 +48,17 @@ const Summary = ({ enableNext }) => {
             });
         }
     }, [summary, resumeInfo, setResumeInfo]);
+
+    const GenerateSummaryFromAI = async () => {
+        setLoading(true)
+        const PROMPT = prompt.replace('{jobTitle}', resumeInfo?.jobTitle);
+        // console.log(PROMPT);
+        const result = await AIChatSession.sendMessage(PROMPT);
+        // console.log(JSON.parse(result.response.text()))
+
+        setAiGeneratedSummaryList(JSON.parse(result.response.text()))
+        setLoading(false);
+    }
 
     // Function to save the summary data
     const onSave = async (e) => {
@@ -76,15 +95,24 @@ const Summary = ({ enableNext }) => {
                 <form className='mt-7' onSubmit={onSave}>
                     <div className='flex justify-between items-end'>
                         <label>Add Summary</label>
-                        <Button type="button" variant="outline" size="sm" className="border-purple-600 hover:text-purple-600">
-                            Generate by AI by me
+                        <Button
+                            onClick={() => GenerateSummaryFromAI()}
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="border-purple-600 hover:text-purple-600 flex gap-2"
+                        >
+                            <Brain className='h-4 w-4' /> Generate by AI
                         </Button>
                     </div>
                     <Textarea
                         className="mt-5"
                         placeholder="Brief summary about your experience or career goal..."
                         value={summary}
-                        onChange={(e) => setSummary(e.target.value)}
+                        onChange={(e) => {
+                            enableNext(false);
+                            setSummary(e.target.value)
+                        }}
                         required
                     />
                     <div className="mt-2 flex justify-end">
@@ -94,6 +122,22 @@ const Summary = ({ enableNext }) => {
                     </div>
                 </form>
             </div>
+
+            {/* Ai Generated Summary List */}
+            {
+                aiGeneratedSummaryList &&
+                <div>
+                    <h1 className='font-bold text-lg'>Suggestion</h1>
+                    {
+                        aiGeneratedSummaryList.map((item, index) => (
+                            <div>
+                                <h2 className='font-bold my-1'>Level: {item?.experience_level}</h2>
+                                <p>{item?.summary}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            }
         </div>
     );
 };

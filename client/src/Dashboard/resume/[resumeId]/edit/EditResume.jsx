@@ -1,4 +1,4 @@
-// resume/[resumeId]/edit/EditResume.jsx
+// client\src\Dashboard\resume\[resumeId]\edit\EditResume.jsx
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FormSection from '../../components/FormSection';

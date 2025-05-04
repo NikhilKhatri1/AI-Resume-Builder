@@ -1,3 +1,4 @@
+// client\src\Dashboard\components\ResumeCardItem.jsx
 import { Notebook } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'

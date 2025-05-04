@@ -1,4 +1,4 @@
-// /database/db.js
+// backend\database\db.js
 
 const mongoose = require("mongoose");
 

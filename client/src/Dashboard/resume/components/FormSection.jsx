@@ -1,8 +1,12 @@
+// client\src\Dashboard\resume\components\FormSection.jsx
+
 import React, { useEffect, useState } from 'react'
 import PersonalDetail from './Forms/PersonalDetail'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react'
 import Summary from './Forms/Summery'
+import Experience from './Forms/Experience'
+import Education from './Forms/Education'
 
 const FormSection = () => {
   const [activeFormIndex, setActiveFormIndex] = useState(() => {
@@ -17,6 +21,7 @@ const FormSection = () => {
     localStorage.setItem("activeFormIndex", activeFormIndex);
   }, [activeFormIndex]);
 
+  // console.log(activeFormIndex)
   return (
     <div>
       <div className='flex justify-between items-center'>
@@ -52,6 +57,8 @@ const FormSection = () => {
       {/* Render forms conditionally */}
       {activeFormIndex === 1 && <PersonalDetail enableNext={(v) => setEnableNext(v)} />}
       {activeFormIndex === 2 && <Summary enableNext={(v) => setEnableNext(v)} />}
+      {activeFormIndex === 3 && <Experience enableNext={(v) => setEnableNext(v)} />}
+      {activeFormIndex === 4 && <Education enableNext={(v) => setEnableNext(v)} />}
       {/* Add more steps similarly */}
     </div>
   );

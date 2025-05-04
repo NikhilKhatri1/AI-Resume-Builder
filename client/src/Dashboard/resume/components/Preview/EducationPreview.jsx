@@ -1,3 +1,4 @@
+// client\src\Dashboard\resume\components\Preview\EducationPreview.jsx
 import React from 'react';
 import dummyData from '../../../../Data/Dummy.jsx';
 

@@ -1,4 +1,4 @@
-// Dashboard/Dashboard.jsx
+// client\src\Dashboard\Dashboard.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';  // You should already have axios installed
 import { useUser } from '@clerk/clerk-react';  // Assuming you are using Clerk for authentication

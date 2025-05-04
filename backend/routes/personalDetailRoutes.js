@@ -1,4 +1,4 @@
-// routes/personalDetailRoutes.js
+// backend\routes\personalDetailRoutes.js
 
 const express = require('express');
 const { upsertPersonalDetail, getPersonalDetail } = require('../controllers/personalDetailController');

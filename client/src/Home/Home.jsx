@@ -1,4 +1,4 @@
-// Home/Home.jsx
+// client\src\Home\Home.jsx
 import Header from '@/components/custom/Header'
 import React from 'react'
 

@@ -1,3 +1,5 @@
+// client\src\Dashboard\resume\components\ResumePreview.jsx
+
 import { ResumeInfoContext } from '@/Context/ResumeInfoContext';
 import React, { useContext } from 'react';
 import PersonDetailPreview from './Preview/PersonDetailPreview';

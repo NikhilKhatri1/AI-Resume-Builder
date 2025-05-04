@@ -1,3 +1,5 @@
+// client\src\Dashboard\resume\components\Forms\PersonalDetail.jsx
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ResumeInfoContext } from '@/Context/ResumeInfoContext';
