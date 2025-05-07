@@ -17,11 +17,12 @@ const formField = {
     description: ''
 };
 
-const Education = () => {
+const Education = ({enableNext}) => {
     const [educationalList, setEducationalList] = useState([formField]);
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const { resumeId } = useParams();
     const [loading, setLoading] = useState(false);
+    
 
     // ✅ Fetch existing resume data or use Dummy fallback
     useEffect(() => {
@@ -77,6 +78,7 @@ const Education = () => {
             await updateResumeDetail(resumeId, updated);
             setResumeInfo(updated);
             toast('Education updated');
+            enableNext(true);
         } catch (err) {
             console.error('Error saving education:', err);
             toast.error('Failed to save education');

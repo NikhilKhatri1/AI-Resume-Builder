@@ -52,9 +52,9 @@ const Summary = ({ enableNext }) => {
     const GenerateSummaryFromAI = async () => {
         setLoading(true)
         const PROMPT = prompt.replace('{jobTitle}', resumeInfo?.jobTitle);
-        // console.log(PROMPT);
+        console.log(PROMPT);
         const result = await AIChatSession.sendMessage(PROMPT);
-        // console.log(JSON.parse(result.response.text()))
+        console.log(JSON.parse(result.response.text()))
 
         setAiGeneratedSummaryList(JSON.parse(result.response.text()))
         setLoading(false);

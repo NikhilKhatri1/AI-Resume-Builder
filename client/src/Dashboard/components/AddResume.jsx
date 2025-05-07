@@ -37,7 +37,7 @@ const AddResume = () => {
 
         try {
             // Send the POST request to the backend to create the resume
-            const response = await axios.post( 'http://localhost:8000/api/resumes', data);
+            const response = await axios.post('http://localhost:8000/api/resumes', data);
             setLoading(false);
             console.log('Resume created successfully:', response.data);
             setOpenDialog(false); // Close the dialog after successful creation
@@ -50,8 +50,8 @@ const AddResume = () => {
 
     return (
         <div>
-            <div className='p-14 py-24 border items-center flex justify-center bg-secondary rounded-lg h-[280px] hover:scale-105 transistion-all hover:shadow-md cursor-pointer border-dashed' onClick={() => setOpenDialog(true)}>
-                <PlusSquare />
+            <div className='p-14 py-24 border items-center flex justify-center bg-secondary rounded-lg h-[310px] hover:scale-105 transistion-all hover:shadow-md cursor-pointer border-dashed' onClick={() => setOpenDialog(true)}>
+                <PlusSquare className='w-15 h-15' />
             </div>
             <Dialog open={openDialog}>
                 <DialogContent>

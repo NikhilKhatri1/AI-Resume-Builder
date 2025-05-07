@@ -10,6 +10,7 @@ import Home from './Home/Home'
 import Dashboard from './Dashboard/Dashboard'
 import { ClerkProvider } from '@clerk/clerk-react'
 import EditResume from './Dashboard/resume/[resumeId]/edit/EditResume'
+import ViewResume from './myResume/[resumeId]/view'
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -35,11 +36,15 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-in",
     element: <SignInPage />
+  },
+  {
+    path: "/my-resume/:resumeId/view",
+    element: <ViewResume />
   }
 ])
 
 createRoot(document.getElementById('root')).render(
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <RouterProvider router={router} />
-    </ClerkProvider>
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <RouterProvider router={router} />
+  </ClerkProvider>
 )

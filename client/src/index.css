@@ -48,7 +48,7 @@
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --primary-sky:oklch(0.55 0.1669 269.2);
+  --primary-sky: oklch(0.55 0.1669 269.2);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -116,6 +116,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -130,4 +131,26 @@
 .rsw-ce ol {
   list-style: decimal;
   padding-left: 2em;
+}
+
+
+@media print {
+  #no-print {
+    display: none;
+  }
+
+  #print-area {
+    display: block;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
 }
