@@ -30,7 +30,7 @@ const ResumeCardItem = ({ resume, onDeleteSuccess }) => {
     const onDelete = async () => {
         setLoading(true)
         try {
-            const response = await axios.delete(`http://localhost:8000/api/resumes/${resume.resumeId}`)
+            const response = await axios.delete(`https://ai-resume-builder-backend-yq3g.onrender.com/api/resumes/${resume.resumeId}`)
             if (response.status === 200) {
                 toast.success("Resume deleted successfully")
                 onDeleteSuccess(resume.resumeId)  // Notify parent to remove resume from list

@@ -15,7 +15,7 @@ const Dashboard = () => {
     if (!user) return;
 
     try {
-      const response = await axios.get('http://localhost:8000/api/resumes', {
+      const response = await axios.get('https://ai-resume-builder-backend-yq3g.onrender.com/api/resumes', {
         params: { userEmail: user.primaryEmailAddress.emailAddress },
       });
       setResumeList(response.data);

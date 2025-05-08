@@ -30,7 +30,7 @@ const Experience = ({ enableNext }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/user-resume/${resumeId}`);
+                const res = await axios.get(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`);
                 if (res.status === 200) {
                     const data = res.data;
                     if (data.experience && data.experience.length > 0) {
@@ -84,7 +84,7 @@ const Experience = ({ enableNext }) => {
     const onSave = async () => {
         setLoading(true);
         try {
-            const res = await axios.put(`http://localhost:8000/user-resume/${resumeId}`, {
+            const res = await axios.put(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`, {
                 experience: experienceList
             });
 

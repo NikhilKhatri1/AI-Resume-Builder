@@ -20,7 +20,7 @@ function Skills({ enableNext }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/user-resume/${resumeId}`);
+                const res = await axios.get(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`);
                 if (res.status === 200) {
                     const data = res.data;
                     if (data.skills && data.skills.length > 0) {
@@ -66,7 +66,7 @@ function Skills({ enableNext }) {
     const onSave = async () => {
         setLoading(true);
         try {
-            const res = await axios.put(`http://localhost:8000/user-resume/${resumeId}`, {
+            const res = await axios.put(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`, {
                 skills: skillsList.map(({ id, ...rest }) => rest)
             });
 

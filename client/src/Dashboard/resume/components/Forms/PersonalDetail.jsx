@@ -18,7 +18,7 @@ const PersonalDetail = ({ enableNext }) => {
     useEffect(() => {
         const fetchPersonalDetails = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/user-resume/${resumeId}`);
+                const res = await axios.get(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`);
                 if (res.data) {
                     setResumeInfo(res.data);
                 }
@@ -40,7 +40,7 @@ const PersonalDetail = ({ enableNext }) => {
     };
 
     const updateResumeDetail = (resumeId, data) =>
-        axios.put(`http://localhost:8000/user-resume/${resumeId}`, data);
+        axios.put(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`, data);
 
     const onSave = async (e) => {
         e.preventDefault();

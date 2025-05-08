@@ -28,7 +28,7 @@ const Education = ({enableNext}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/user-resume/${resumeId}`);
+                const response = await axios.get(`https://ai-resume-builder-backend-yq3g.onrender.com/${resumeId}`);
                 if (response.status === 200) {
                     const data = response.data;
                     setResumeInfo(data);
@@ -69,7 +69,7 @@ const Education = ({enableNext}) => {
     };
 
     const updateResumeDetail = (resumeId, data) =>
-        axios.put(`http://localhost:8000/user-resume/${resumeId}`, data);
+        axios.put(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`, data);
 
     const onSave = async () => {
         setLoading(true);

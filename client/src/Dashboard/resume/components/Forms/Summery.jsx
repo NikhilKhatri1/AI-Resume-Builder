@@ -65,7 +65,7 @@ const Summary = ({ enableNext }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.put(`http://localhost:8000/user-resume/${resumeId}`, {
+            const response = await axios.put(`https://ai-resume-builder-backend-yq3g.onrender.com/user-resume/${resumeId}`, {
                 summary
             });
 

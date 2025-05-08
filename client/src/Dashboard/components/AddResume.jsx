@@ -37,7 +37,7 @@ const AddResume = () => {
 
         try {
             // Send the POST request to the backend to create the resume
-            const response = await axios.post('http://localhost:8000/api/resumes', data);
+            const response = await axios.post('https://ai-resume-builder-backend-yq3g.onrender.com/api/resumes', data);
             setLoading(false);
             console.log('Resume created successfully:', response.data);
             setOpenDialog(false); // Close the dialog after successful creation
