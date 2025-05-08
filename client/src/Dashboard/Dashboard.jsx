@@ -1,16 +1,15 @@
-// client\src\Dashboard\Dashboard.jsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';  // You should already have axios installed
-import { useUser } from '@clerk/clerk-react';  // Assuming you are using Clerk for authentication
+import axios from 'axios';
+import { useUser } from '@clerk/clerk-react';
 import AddResume from './components/AddResume';
 import ResumeCardItem from './components/ResumeCardItem';
 
 const Dashboard = () => {
-  const { user } = useUser();  // Get user data from Clerk
+  const { user } = useUser();
   const [resumeList, setResumeList] = useState([]);
-  const [loading, setLoading] = useState(true);  // Loading state
-  const [error, setError] = useState('');  // Error message if any
-  // console.log(BACKEND_URL);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
   // Function to fetch user resume list
   const userDataList = async () => {
     if (!user) return;
@@ -19,7 +18,6 @@ const Dashboard = () => {
       const response = await axios.get('http://localhost:8000/api/resumes', {
         params: { userEmail: user.primaryEmailAddress.emailAddress },
       });
-      console.log(response.data);  // Log the response data
       setResumeList(response.data);
       setLoading(false);
     } catch (error) {
@@ -28,11 +26,16 @@ const Dashboard = () => {
     }
   };
 
+  // Handle resume deletion
+  const handleDeleteSuccess = (deletedResumeId) => {
+    setResumeList((prevList) => prevList.filter((resume) => resume.id !== deletedResumeId));
+  };
+
   useEffect(() => {
     if (user) {
       userDataList();  // Fetch resumes when user is available
     }
-  }, [user]);  // Re-run whenever user data changes
+  }, [user]);
 
   return (
     <div className='p-10 md:px-20 lg:px-32 bg-gray-100 h-screen'>
@@ -41,7 +44,7 @@ const Dashboard = () => {
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-5'>
         <AddResume />
         {resumeList && resumeList.map((resume, index) => (
-          <ResumeCardItem resume={resume} key={index} />
+          <ResumeCardItem resume={resume} key={index} onDeleteSuccess={handleDeleteSuccess} />
         ))}
       </div>
     </div>
