@@ -4,11 +4,11 @@ import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
-import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import axios from 'axios';
 import Dummy from '../../../../Data/Dummy';
+import { ResumeInfoContext } from '@/Context/ResumeInfoContext.jsx';
 
 function Skills({ enableNext }) {
     const [skillsList, setSkillsList] = useState([]);
