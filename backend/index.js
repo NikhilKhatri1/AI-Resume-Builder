@@ -1,4 +1,4 @@
-// backend\server.js
+// backend\index.js
 const app = require('./app.js'); // Import app from app.js
 
 const PORT = process.env.PORT || 8000;
