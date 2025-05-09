@@ -14,9 +14,7 @@ connectDb();
 
 // Middlewares
 app.use(express.json());
-app.use(cors({
-    origin: 'https://ai-resume-builder-frontend-kxrt.onrender.com',
-}));
+app.use(cors());
 
 // Routes
 app.get('/', (req, res) => {

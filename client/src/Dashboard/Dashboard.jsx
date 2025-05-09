@@ -15,14 +15,17 @@ const Dashboard = () => {
     if (!user) return;
 
     try {
-      const response = await axios.get('https://ai-resume-builder-backend-yq3g.onrender.com/api/resumes', {
+      const response = await axios.get('https://ai-resume-builder-backend-yq3g.onrender.com/api/resumes' || 'http://localhost:8000/api/resumes', {
         params: { userEmail: user.primaryEmailAddress.emailAddress },
+
       });
+      console.log(response)
       setResumeList(response.data);
       setLoading(false);
     } catch (error) {
       setError('No resumes found');
       setLoading(false);
+      console.log(error)
     }
   };
 
